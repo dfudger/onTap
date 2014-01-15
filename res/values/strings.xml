@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">onTap</string>
+    <string name="menu_settings">Settings</string>
+    
+    <string name="edit_message">Enter a message</string>
+    <string name="takePhoto">Take a photo</string>
+    <string name="viewGallery">View Gallery</string>
+    <string name="bottleTitle">Title of Bottle</string>
+    <string name= "hintBottleTitle">Title of Bottle</string>
+    <string name= "attribBottle">Image of Bottle</string>
+    <string name="title_activity_display_message">My Message</string>
+
+    <string name="hello">Hello World, PhotoIntentActivity!</string>
+    <string name="btnIntend">Take (big) Picture</string>
+    <string name="btnIntendS">Take (small) Picture</string>
+    <string name="cannot">Cannot</string>
+    <string name="album_name">CameraSample</string>
+    <string name="addNewWine">Add a New Bottle</string>
+    <color name="background">#F0E5C9</color>
+    <color name="buttonOld">#C6B299</color>
+    <color name="buttonOld2">#A68C69</color>
+    <color name="red">#8D5103</color>
+    <color name="white">#F4F4F4</color>
+    <string name="saveWine">Save Bottle</string>
+    
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical"
+    android:scrollbars="vertical" >
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="5dp"
+        android:text="@string/addNewWine"
+        android:textAppearance="?android:attr/textAppearanceLarge" >
+
+    </TextView>
+        
+    <EditText
+        android:id="@+id/editTitle"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/blackwithborder"
+        android:ems="10"
+        android:paddingTop="20dp"
+        android:hint="@string/hintBottleTitle" >
+		
+   	</EditText>
+    
+    <Button
+        android:id="@+id/btnSave"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/saveWine" 
+        android:layout_margin="20dp"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:onClick="createWine">
+        
+    </Button>
+    
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:visibility="visible"        
+        android:contentDescription="@string/attribBottle">
+     </ImageView>
+
+</LinearLayout>
