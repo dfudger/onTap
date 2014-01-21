@@ -49,7 +49,7 @@ public class GalleryActivity extends Activity
 
         for(int i = 0; i < mArrayList.size(); i++)
         {
-        	System.out.println(mArrayList.get(i));
+        	//System.out.println(mArrayList.get(i));
         }
 	}	
 	

@@ -2,7 +2,10 @@ package fudgestudios.ontap;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -16,26 +19,36 @@ public class CreateBottleActivity extends Activity
 	private WineDBAdapter mDbHelper;
 	private ImageView y;
 	private Bitmap mImageBitmap;
-	private String filename;
+	
 	private String bottleTitle;
 	EditText mEditTitle;
+	Uri myUri;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        //Log.w("WineApp","Edit Bottle View");
+        Log.w("WineApp","Edit Bottle View");
         
         /*** Display the GUI ***/
         setContentView(R.layout.new_bottle);
         
-        /*** Display the image on the screen ***/
-        mImageBitmap = (Bitmap) getIntent().getExtras().get("bitmap");
         y = (ImageView) findViewById(R.id.imageView2);
- 
-        y.setImageBitmap(mImageBitmap);
         y.setVisibility(View.VISIBLE);
         
+        myUri = Uri.parse(getIntent().getExtras().getString("fileUri"));
+    	Log.w("onTap", myUri.getPath());
+    	Log.w("onTap", "This worked!");
+        BitmapFactory.Options options = new BitmapFactory.Options();
+
+        // downsizing image as it throws OutOfMemory Exception for larger images
+        options.inSampleSize = 10;
+
+        final Bitmap bitmap = BitmapFactory.decodeFile(myUri.getPath(),
+                options);
+
+        y.setImageBitmap(bitmap);
+
         /*** Open up DB ***/
         mDbHelper = new WineDBAdapter(this);
         mDbHelper.open();   
@@ -62,25 +75,16 @@ public class CreateBottleActivity extends Activity
 	
     private void createWine() 
     {
-    	//Log.w("WineApp","Create Wine");
-    	filename = getIntent().getExtras().getString("fileName");//(String) getIntent().getExtras().get("filename");
-		String noteName = "Wine " + mWineNumber++;
-		System.out.println("Wine Name: " + noteName);
-		System.out.println("File Name: " + filename);
-        
-		mEditTitle = (EditText) findViewById(R.id.editTitle);
+//    	Uri myUri = Uri.parse(getIntent().getExtras().getString("fileUri"));
+//    	Log.w("onTap", myUri.getPath());
+//    	Log.w("onTap", "This worked!");
+    	
+    	mEditTitle = (EditText) findViewById(R.id.editTitle);
 		bottleTitle = mEditTitle.getText().toString();
-		//Log.v("EditText", bottleTitle);
 		
-		//if(bottleTitle == null)
-			//Log.w("WineApp", "EMPTY");
-			
-		//else
-		//{
-		mDbHelper.createWine(bottleTitle, filename);
+		mDbHelper.createWine(bottleTitle, myUri.getPath());
 		mDbHelper.close();
 		finish();
-		//}
     }
 
 }
