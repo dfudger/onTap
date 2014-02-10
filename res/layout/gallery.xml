@@ -10,8 +10,9 @@
     android:numColumns="2"
     android:paddingBottom="15dp"
     android:paddingTop="15dp"
-    android:stretchMode="columnWidth"
     android:verticalSpacing="10dp" />
+<!--android:stretchMode="columnWidth"-->
+
 
 <!-- Example from online -->
 <!--  <GridView xmlns:android="http://schemas.android.com/apk/res/android"

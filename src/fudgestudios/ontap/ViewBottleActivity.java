@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
@@ -21,7 +22,7 @@ public class ViewBottleActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
-        //Log.w("WineApp","View Bottle View");
+        Log.w("WineApp","View Bottle View");
         
         /*** Display the GUI ***/
         setContentView(R.layout.view_bottle);

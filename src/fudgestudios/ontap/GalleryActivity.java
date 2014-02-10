@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -67,6 +68,8 @@ public class GalleryActivity extends Activity
 		mCursor = mDbHelper.fetchAllWines();
 		for(mCursor.moveToFirst(); !mCursor.isAfterLast(); mCursor.moveToNext()) 
 		{
+			Log.w("WineApp","In Fetch Images");
+			Log.w("WineApp", mCursor.getString(2));
 			//The Cursor is now set to the right position
 			mArrayList.add(mCursor.getString(2));
 		}

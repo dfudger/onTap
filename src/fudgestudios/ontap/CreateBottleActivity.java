@@ -76,8 +76,8 @@ public class CreateBottleActivity extends Activity
     private void createWine() 
     {
 //    	Uri myUri = Uri.parse(getIntent().getExtras().getString("fileUri"));
-//    	Log.w("onTap", myUri.getPath());
-//    	Log.w("onTap", "This worked!");
+    	Log.w("onTap", myUri.getPath());
+    	Log.w("onTap", "This worked!");
     	
     	mEditTitle = (EditText) findViewById(R.id.editTitle);
 		bottleTitle = mEditTitle.getText().toString();
