@@ -162,7 +162,7 @@ public class GalleryActivity extends Activity
 
             	BitmapFactory.Options options = new BitmapFactory.Options();
                 
-            	options.inSampleSize = 4;
+            	options.inSampleSize = 8;
                 //options.inJustDecodeBounds = true;
                 Bitmap myBitmap = BitmapFactory.decodeFile(urlArray.get(position), options);
                 
