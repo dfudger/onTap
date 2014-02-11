@@ -41,23 +41,13 @@ public class CreateBottleActivity extends Activity
         
         myUri = Uri.parse(getIntent().getExtras().getString("fileUri"));
     	
-    	//BitmapFactory.Options bounds = new BitmapFactory.Options();
-        //bounds.inJustDecodeBounds = true;
-        //BitmapFactory.decodeFile(myUri.getPath(), bounds);
-        BitmapFactory.Options bounds = new BitmapFactory.Options();
-        //bounds.inJustDecodeBounds = true;
-        
-        
-        //Bitmap bm = BitmapFactory.decodeFile(myUri.getPath(), bounds);
+    	BitmapFactory.Options bounds = new BitmapFactory.Options();
         Bitmap bm = BitmapFactory.decodeFile(myUri.getPath(), bounds);
-        if(bm == null)
-        	Log.w("onTap", "ARRRRH");
          
         ExifInterface exif = null;
 		try {
 			exif = new ExifInterface(myUri.getPath());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
          String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
@@ -67,28 +57,13 @@ public class CreateBottleActivity extends Activity
          if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
          if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
          if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
-
-         Log.w("onTap", "Zero");
          
          Matrix matrix = new Matrix();
-         
-         Log.w("onTap", "One");
-         
          matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
          
-         Log.w("onTap", "Two");
-         
          Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
-    	
-    	
-    	
-         Log.w("onTap", "Three");
-    	//BitmapFactory.Options options = new BitmapFactory.Options();
-        //final Bitmap bitmap = BitmapFactory.decodeFile(myUri.getPath(),
-        //        options);
-        Log.w("onTap", "Four");
-        
-        y.setImageBitmap(rotatedBitmap);
+         
+         y.setImageBitmap(rotatedBitmap);
         
         
         

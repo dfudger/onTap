@@ -1,8 +1,12 @@
 package fudgestudios.ontap;
 
+import java.io.IOException;
+
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,11 +37,45 @@ public class ViewBottleActivity extends Activity
                 
         /*** Display the image on the screen ***/
         fname = (String) getIntent().getExtras().get("fileName");
-        mImageBitmap = BitmapFactory.decodeFile(fname);
+        
+        
+        
+        
+        
+    	BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        
+        Bitmap bm = BitmapFactory.decodeFile(fname, options);
+         
+        ExifInterface exif = null;
+		
+        try {
+			exif = new ExifInterface(fname);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        
+		String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
+         
+        int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
+        int rotationAngle = 0;
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
+        if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
+         
+        Matrix matrix = new Matrix();
+        matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
+         
+        Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, options.outWidth, options.outHeight, matrix, true);
+       
+        
+        
+        
+        
         
         y = (ImageView) findViewById(R.id.imageView2);
  
-        y.setImageBitmap(mImageBitmap);
+        y.setImageBitmap(rotatedBitmap);
         y.setVisibility(View.VISIBLE);
         
         /*** Open up DB ***/

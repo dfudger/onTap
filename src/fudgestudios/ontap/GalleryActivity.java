@@ -1,5 +1,6 @@
 package fudgestudios.ontap;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -8,6 +9,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -143,38 +146,45 @@ public class GalleryActivity extends Activity
         	Log.w("onTap", "In Get View!");
         	
             View v = view;
-            ImageView picture;// = new ImageView(mContext);
+            ImageView picture;
             
             if(v == null)
             {
               v = inflater.inflate(R.layout.gridview_item, viewGroup, false);
-              v.setTag(R.id.picture, v.findViewById(R.id.picture));
-               
+              v.setTag(R.id.picture, v.findViewById(R.id.picture));   
             }
             
             picture = (ImageView)v.getTag(R.id.picture);
             
-            //picture.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            //picture.setLayoutParams(new GridView.LayoutParams(85, 85));
-            //picture.setPadding(8, 8, 8, 8);
-            
             try {
 
             	BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inSampleSize = 8;
                 
-            	options.inSampleSize = 8;
-                //options.inJustDecodeBounds = true;
-                Bitmap myBitmap = BitmapFactory.decodeFile(urlArray.get(position), options);
+                Bitmap bm = BitmapFactory.decodeFile(urlArray.get(position), options);
+                 
+                ExifInterface exif = null;
+        		
+                try {
+        			exif = new ExifInterface(urlArray.get(position));
+        		} catch (IOException e) {
+        			e.printStackTrace();
+        		}
                 
-                int imageHeight = options.outHeight;
-                int imageWidth = options.outWidth;
-                String imageType = options.outMimeType;
+        		String orientString = exif.getAttribute(ExifInterface.TAG_ORIENTATION);
+                 
+                int orientation = orientString != null ? Integer.parseInt(orientString) : ExifInterface.ORIENTATION_NORMAL;
+                int rotationAngle = 0;
+                if (orientation == ExifInterface.ORIENTATION_ROTATE_90) rotationAngle = 90;
+                if (orientation == ExifInterface.ORIENTATION_ROTATE_180) rotationAngle = 180;
+                if (orientation == ExifInterface.ORIENTATION_ROTATE_270) rotationAngle = 270;
+                 
+                Matrix matrix = new Matrix();
+                matrix.setRotate(rotationAngle, (float) bm.getWidth() / 2, (float) bm.getHeight() / 2);
+                 
+                Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, options.outWidth, options.outHeight, matrix, true);
                 
-                Log.w("onTap", "Image Height: " + imageHeight);
-                Log.w("onTap", "Image Width: " + imageWidth);
-                Log.w("onTap", "Image Type: " + imageType);
-                
-                picture.setImageBitmap(myBitmap);
+            	picture.setImageBitmap(rotatedBitmap);
                 
                 return v;
                 
