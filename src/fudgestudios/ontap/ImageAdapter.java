@@ -31,12 +31,7 @@ public class ImageAdapter extends BaseAdapter
 	public int getCount() {
         return urlArray.size();
     }
- 
-    //@Override MINE
-    //public Object getItem(int position) {
-    //   return mThumbIds[position];
-    //}
-    
+
     @Override
 	public Object getItem(int position) {
         return null;
@@ -83,12 +78,6 @@ public class ImageAdapter extends BaseAdapter
           }
         
         return null;
-        //BitmapFactory.Options options = new BitmapFactory.Options();
-        //options.inJustDecodeBounds = true;
-        //BitmapFactory.decodeResource(getResources(), urlArray.get(position), options);
-        
-        //imageView.setImageBitmap(decodeSampledBitmapFromResource(getResources(), urlArray.get(position), 80, 80));
-      
     }
     
     
@@ -130,28 +119,5 @@ public class ImageAdapter extends BaseAdapter
         options.inJustDecodeBounds = false;
         return BitmapFactory.decodeResource(res, resId, options);
     }
-   
-    /*
- // create a new ImageView for each item referenced by the Adapter
-    @Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
-        if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            //imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
-        } else {
-            imageView = (ImageView) convertView;
-        }
-
-        Bitmap myBitmap = BitmapFactory.decodeFile(urlArray.get(position));
-        
-        
-        imageView.setImageBitmap(myBitmap);
-        
-        return imageView;
-    }*/
-    //END EXAMPLE
 
 }

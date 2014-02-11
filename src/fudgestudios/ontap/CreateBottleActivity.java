@@ -42,7 +42,7 @@ public class CreateBottleActivity extends Activity
         BitmapFactory.Options options = new BitmapFactory.Options();
 
         // downsizing image as it throws OutOfMemory Exception for larger images
-        options.inSampleSize = 10;
+        //options.inSampleSize = 10;
 
         final Bitmap bitmap = BitmapFactory.decodeFile(myUri.getPath(),
                 options);
